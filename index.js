@@ -77,6 +77,11 @@ Return ONLY a JSON object in this shape:
 }`;
 }
 
+// ✅ ROOT CHECK (IMPORTANT FOR DEBUG)
+app.get("/", (_, res) => {
+  res.send("Backend running 🚀");
+});
+
 app.post("/api/analyze", upload.single("resume"), async (req, res) => {
   try {
     const { jobDescription } = req.body;

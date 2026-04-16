@@ -9,7 +9,9 @@ const mammoth = require("mammoth"); // For DOCX parsing
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-app.use(cors({ origin: "http://localhost:5173" }));
+app.use(cors({
+  origin: "*"
+}));
 app.use(express.json());
 
 // Since standard Express cannot handle file uploads 

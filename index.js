@@ -119,6 +119,6 @@ app.post("/api/analyze", upload.single("resume"), async (req, res) => {
 
 app.get("/api/health", (_, res) => res.json({ status: "ok" }));
 
-app.listen(PORT, () =>
-  console.log(`✅ ATS Scorer server running on http://localhost:${PORT}`),
+app.listen(PORT, "0.0.0.0", () =>
+  console.log(`✅ ATS Scorer server running on http://localhost:${PORT}`)
 );

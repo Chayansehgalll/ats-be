@@ -7,11 +7,9 @@ const { GoogleGenerativeAI } = require("@google/generative-ai");
 const pdfParse = require("pdf-parse");
 const mammoth = require("mammoth"); // For DOCX parsing
 const app = express();
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 5000;
 
-app.use(cors({
-  origin: "*"
-}));
+app.use(cors({ origin: "http://localhost:5173" }));
 app.use(express.json());
 
 // Since standard Express cannot handle file uploads 
@@ -77,11 +75,6 @@ Return ONLY a JSON object in this shape:
 }`;
 }
 
-// ✅ ROOT CHECK (IMPORTANT FOR DEBUG)
-app.get("/", (_, res) => {
-  res.send("Backend running 🚀");
-});
-
 app.post("/api/analyze", upload.single("resume"), async (req, res) => {
   try {
     const { jobDescription } = req.body;
@@ -119,6 +112,6 @@ app.post("/api/analyze", upload.single("resume"), async (req, res) => {
 
 app.get("/api/health", (_, res) => res.json({ status: "ok" }));
 
-app.listen(PORT, "0.0.0.0", () =>
-  console.log(`✅ ATS Scorer server running on http://localhost:${PORT}`)
+app.listen(PORT, () =>
+  console.log(`✅ ATS Scorer server running on http://localhost:${PORT}`),
 );
